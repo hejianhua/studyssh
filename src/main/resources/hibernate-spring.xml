@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    		http://www.springframework.org/schema/beans/spring-beans.xsd
+        	http://www.springframework.org/schema/context 
+        	http://www.springframework.org/schema/context/spring-context.xsd
+        	http://www.springframework.org/schema/aop 
+        	http://www.springframework.org/schema/aop/spring-aop.xsd
+        	http://www.springframework.org/schema/tx 
+        	http://www.springframework.org/schema/tx/spring-tx.xsd
+        	">
+        	
+  <!-- 思考：spring与hibernate的结合。那么spring需要帮hibernate干一些什么事情呢？
+  		1.管理事物
+  		2.连接数据库
+  		3.一些sessionFactory相关的，懒加载扩大session范围
+   -->	
+<!-- 配置数据源  c3p0,  这个也是sessionFactory需要的-->
+ <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+     <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/studyssh"></property>
+     <property name="user" value="root"></property>
+     <property name="password" value="root"></property>
+ </bean>
+ 
+ <!-- 获取sessionFactory需要加载hibernate.cfg.xml获取其中的配置的信息，这里直接将那些配置信息在这里配置 -->
+ <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+     <property name="dataSource" ref="dataSource"></property>
+    <!-- 配置一些其他的信息，方言等 -->
+     <property name="hibernateProperties">
+         <props>
+             <prop key="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</prop>
+             <prop key="hibernate.show_sql">true</prop>
+             <prop key="hibernate.format_sql">true</prop>
+             <prop key="hibernate.hbm2ddl.auto">update</prop>            
+         </props>
+    </property>
+     <!-- 添加orm映射文件 -->
+     <property name="mappingLocations" value="classpath:xc/ssh/domain/User.hbm.xml"></property>
+ </bean>
+ 
+  <!-- 管理事务 1.首先需要事务管理器-->
+  <bean id="txmanage"   class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+  		<property name="sessionFactory" ref="sessionFactory"></property>
+  </bean>
+  
+  <!-- 配置事物通知 -->
+  <tx:advice id="txadvice" transaction-manager="txmanage">
+  		<!-- 这个advice事物的属性，主要作用是事物的 挂起机制  与  读写权限  -->
+  		<tx:attributes>
+  			<tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+  			<tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+  			<tx:method name="save*" propagation="REQUIRED" read-only="false"/>
+  			<tx:method name="modify*" propagation="REQUIRED" read-only="false"/>
+  			<tx:method name="updata*" propagation="REQUIRED" read-only="false"/>
+  			<tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
+  		</tx:attributes>
+  </tx:advice>
+  
+  <!-- 把事物切入方法中 -->
+	<aop:config>
+		<aop:pointcut id="txpoint" expression="execution(* xc.ssh.service.impl..*ServiceImpl.*(..))" />
+		<aop:advisor advice-ref="txadvice" pointcut-ref="txpoint"/>
+	</aop:config>
+	
+	
+	 <bean id="userDaoImpl" class="xc.ssh.dao.impl.UserDaoImpl">
+	 	<property name="aaa" value="asdasdsad"></property>
+	    <property name="sessionFactory" ref="sessionFactory"></property>
+	  </bean>
+	
+	
+ </beans>
