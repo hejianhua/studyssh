@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>
+	<class name="top.lingzhen.user.domain.Role"  table="role">
+		<id name="roleId" column="role_id">
+			<generator class="native"></generator>
+		</id>
+	<property name="roleName" column="role_name"/>
+	
+	<property name="roleDeclare" column="role_declare"/>
+	
+	<property name="roleCreateTime" column="role_create_time"/>
+	</class>
+</hibernate-mapping>
+

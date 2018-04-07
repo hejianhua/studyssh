@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
 	<package name="ssh" namespace="/" extends="struts-default">
-		<action name="test" class="xc.ssh.action.Test" >
+		<action name="test" class="test" >
 				<result name="success">index.jsp</result>
 		</action>
 	</package>

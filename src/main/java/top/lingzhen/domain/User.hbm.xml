@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>
+	<class name="top.lingzhen.user.domain.Module"  table="module">
+		<id name="moduleId" column="module_id">
+			<generator class="native"></generator>
+		</id>
+	
+	<property name="moduleName" column="module_name"/>
+	<property name="moduleLink" column="module_link"/>
+	<property name="rightFlag" column="right_flag"/>
+	<property name="moduleCreateTime" column="module_create_time"/>
+	
+	</class>
+</hibernate-mapping>
+
