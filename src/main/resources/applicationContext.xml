@@ -21,5 +21,19 @@
 	  -->
 	 <context:component-scan base-package="top.lingzhen.*"/>
 
+	<!-- BaseDao的bean -->
+	<bean id="baseDaoImpl" class="top.lingzhen.dao.impl.BaseDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="baseServiceImpl" class="top.lingzhen.service.impl.BaseServiceImpl">
+		<property name="baseDaoImpl" ref="baseDaoImpl"/>
+	</bean>
+	
+	<bean id="userServiceImpl" class="top.lingzhen.service.impl.UserServiceImpl" parent="baseServiceImpl">
+	</bean>
+	
+	
+
 	
 </beans>

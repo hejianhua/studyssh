@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import xc.ssh.dao.impl.UserDaoImpl;
+
 
 
 
@@ -25,8 +25,8 @@ public class SpringTest {
 /*		SessionFactory bean3 = (SessionFactory) ac.getBean("sessionFactory");
 		bean3.openSession();
 		System.out.println(bean3);*/
-		UserDaoImpl bean = (UserDaoImpl) ac.getBean("userDao");
-		System.out.println(bean.getAaa());
+		
+
 	}
 	
 	

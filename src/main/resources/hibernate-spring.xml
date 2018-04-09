@@ -28,7 +28,7 @@
  </bean>
  
  <!-- 获取sessionFactory需要加载hibernate.cfg.xml获取其中的配置的信息，这里直接将那些配置信息在这里配置 -->
- <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+ <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
      <property name="dataSource" ref="dataSource"></property>
     <!-- 配置一些其他的信息，方言等 -->
      <property name="hibernateProperties">
@@ -40,11 +40,11 @@
          </props>
     </property>
      <!-- 添加orm映射文件 -->
-     <property name="mappingLocations" value="classpath:top/lingzhen/domain/User.hbm.xml"></property>
+     <property name="mappingLocations" value="classpath:hibernateConfig/User.hbm.xml"></property>
  </bean>
  
   <!-- 管理事务 1.首先需要事务管理器-->
-  <bean id="txmanage"   class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+  <bean id="txmanage"   class="org.springframework.orm.hibernate4.HibernateTransactionManager">
   		<property name="sessionFactory" ref="sessionFactory"></property>
   </bean>
   
@@ -68,14 +68,7 @@
 	</aop:config>
 	
 	
-	 <bean id="userDaoImpl" class="top.lingzhen.dao.impl.UserDaoImpl">
-	 	<property name="aaa" value="asdasdsad"></property>
-	    <property name="sessionFactory" ref="sessionFactory"></property>
-	  </bean>
 	
-	<!-- BaseDao的bean -->
-	<bean id="baseDao" class="top.lingzhen.dao.impl.BaseDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
+
 	
  </beans>

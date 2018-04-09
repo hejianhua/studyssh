@@ -7,5 +7,9 @@
 		<action name="test" class="test" >
 				<result name="success">index.jsp</result>
 		</action>
+		<action name="registerAction" class="top.lingzhen.action.RegisterAction" >
+				<result name="success">success.jsp</result>
+		</action>
+		
 	</package>
 </struts>

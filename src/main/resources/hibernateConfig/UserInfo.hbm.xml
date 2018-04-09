@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">  
+<hibernate-mapping>
+	<class name="top.lingzhen.user.domain.UserInfo"  table="user_info">
+		<id name="userInfoId" column="user_info_id">
+			<generator class="native"></generator>
+		</id>
+	<property name="userId" column="user_id"/>
+	
+	<property name="userName" column="user_name"/>
+	
+	<property name="userBirthday" column="user_birthday"/>
+	
+	<property name="userCollege" column="user_college"/>
+	
+	<property name="userNumber" column="user_number"/>
+	
+	<property name="userSex" column="user_sex"/>
+	
+	<property name="userStudentId" column="user_student_id"/>
+	
+	<property name="userDeclare" column="user_declare"/>
+	
+	</class>
+</hibernate-mapping>
+
