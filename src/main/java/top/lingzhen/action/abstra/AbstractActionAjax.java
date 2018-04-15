@@ -1,4 +1,4 @@
-package top.lingzhen.action;
+package top.lingzhen.action.abstra;
 
 import net.sf.json.JSONObject;
 
