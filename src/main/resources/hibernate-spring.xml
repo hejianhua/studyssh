@@ -22,23 +22,23 @@
 <!-- 配置数据源  c3p0,  这个也是sessionFactory需要的-->
  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
      <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/studyssh"></property>
+     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/market"></property>
      <property name="user" value="root"></property>
      <property name="password" value="root"></property>
  </bean>
  
  <!-- 获取sessionFactory需要加载hibernate.cfg.xml获取其中的配置的信息，这里直接将那些配置信息在这里配置 -->
- <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-     <property name="dataSource" ref="dataSource"></property>
-    <!-- 配置一些其他的信息，方言等 -->
-     <property name="hibernateProperties">
-         <props>
-             <prop key="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</prop>
-             <prop key="hibernate.show_sql">true</prop>
-             <prop key="hibernate.format_sql">true</prop>
-             <prop key="hibernate.hbm2ddl.auto">update</prop>            
-         </props>
-    </property>
+ 	<!-- 配置hibernate的常量 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
      <!-- 添加orm映射文件 -->
      <property name="mappingLocations" value="classpath:hibernateConfig/User.hbm.xml"></property>
  </bean>
@@ -58,6 +58,7 @@
   			<tx:method name="modify*" propagation="REQUIRED" read-only="false"/>
   			<tx:method name="updata*" propagation="REQUIRED" read-only="false"/>
   			<tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
+  			<tx:method name="login*" propagation="REQUIRED" read-only="true"/>
   		</tx:attributes>
   </tx:advice>
   

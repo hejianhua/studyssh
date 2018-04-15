@@ -22,9 +22,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<form action="registerAction"  method="post">
-  		账号: <input type="text" name="username"/>
-  		密码: <input type="text"  name="password">
+  	<form action="user_login"  method="post">
+  		账号: <input type="text" name="userName"/>
+  		密码: <input type="text"  name="userPassword">
   		<input  type="submit" value="求求你了成功吧" />
   	</form>
   	
