@@ -1,5 +1,6 @@
 package top.lingzhen.action;
 
+import top.lingzhen.action.abstra.AbstractActionAjax;
 import top.lingzhen.domain.user.User;
 import top.lingzhen.service.UserService;
 
